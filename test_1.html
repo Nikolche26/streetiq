@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест за безопасно движение</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Comic Sans MS", "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+        }
+
+        header {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 16px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #388e3c;
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .quiz-container {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .answers label {
+            display: block;
+            background: #eeeeee;
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .answers label.correct {
+            background-color: #c8e6c9; /* зелено */
+        }
+
+        .answers label.wrong {
+            background-color: #ffcdd2; /* червено */
+        }
+
+        button.check {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            margin-top: 15px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        footer {
+            background-color: #388e3c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<main>
+    <div class="quiz-container">
+        <h2>Тест: Как да се движим безопасно по пътищата</h2>
+        <form id="quizForm"></form>
+        <button class="check" onclick="checkAnswers()">Провери резултата</button>
+        <div id="result"></div>
+    </div>
+</main>
+
+<footer>
+    <marquee direction="left" scrollamount="5">
+  © 2025 StreetIQ - Интелигентни на пътя, Никол Маринова
+</marquee>>
+</footer>
+
+<script>
+const questions = [
+    {q:"Къде трябва да се движат пешеходците?", a:["По тротоара","По пътя","По средата на улицата"], correct:0},
+    {q:"Къде е най-безопасно да се пресича?", a:["На пешеходна пътека","Между колите","Навсякъде"], correct:0},
+    {q:"Какво трябва да направим преди пресичане?", a:["Да тичаме","Да се огледаме наляво и надясно","Да гледаме телефона"], correct:1},
+    {q:"Какво означава червеният сигнал на светофара?", a:["Трябва да спрем","Можем да тръгнем","Да тичаме"], correct:0},
+    {q:"Какво трябва да правим на зелен светофар?", a:["Тръгваме внимателно","Тръгваме бързо","Игнорираме"], correct:0},
+    {q:"Къде не трябва да играем?", a:["На тротоара","На пътя","В училищната градина"], correct:1},
+    {q:"Може ли да използваме телефон по време на пресичане?", a:["Да","Не","Само ако няма коли"], correct:1},
+    {q:"Кои трябва да спазват правилата за движение?", a:["Само шофьори","Само пешеходци","Всички"], correct:2},
+    {q:"Кой трябва да дава добър пример на децата?", a:["Възрастните","Децата","Никой"], correct:0},
+    {q:"Защо спазваме правилата за движение?", a:["За забавление","За да сме в безопасност","Няма причина"], correct:1}
+];
+
+// Разбъркване на масив
+function shuffle(array) {
+    for (let i = array.length-1; i>0; i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Зареждане на теста
+function loadQuiz() {
+    const form = document.getElementById("quizForm");
+    form.innerHTML = "";
+    questions.forEach((q,i)=>{
+        shuffle(q.a); // разбъркване на отговорите
+        const div = document.createElement("div");
+        div.className = "question";
+        div.innerHTML = `<p>${i+1}. ${q.q}</p>`;
+        const answersDiv = document.createElement("div");
+        answersDiv.className = "answers";
+        q.a.forEach((ans,j)=>{
+            const correctIndex = q.a.indexOf(q.a[q.correct]);
+            answersDiv.innerHTML += `<label><input type="radio" name="q${i}" value="${j}"> ${ans}</label>`;
+        });
+        div.appendChild(answersDiv);
+        form.appendChild(div);
+    });
+}
+
+// Проверка на отговорите
+function checkAnswers() {
+    let score = 0;
+    questions.forEach((q,i)=>{
+        const answers = document.querySelectorAll(`input[name=q${i}]`);
+        answers.forEach(input=>{
+            const label = input.parentElement;
+            label.classList.remove("correct","wrong");
+            const correctIndex = q.a.indexOf(q.a[q.correct]);
+            if(input.checked){
+                if(input.value == correctIndex){
+                    label.classList.add("correct");
+                    score++;
+                } else {
+                    label.classList.add("wrong");
+                }
+            } else if(input.value == correctIndex){
+                label.classList.add("correct");
+            }
+        });
+    });
+    let comment = score>=9?"Отличен резултат!":score>=6?"Много добре!":"Прегледай информацията отново.";
+    document.getElementById("result").innerText = `Резултат: ${score} от 10\n${comment}`;
+}
+
+loadQuiz();
+</script>
+
+</body>
+</html>

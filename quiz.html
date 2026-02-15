@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>StreetIQ - Интелигентни на пътя</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Comic Sans MS", "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+        }
+
+        header {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 16px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #388e3c;
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        main h2 {
+            color: #4caf50;
+        }
+
+        ol li {
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        input[type="text"] {
+            padding: 6px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 2px solid #ccc;
+            width: 160px;
+        }
+
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #388e3c;
+        }
+
+        #answerList ul {
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #388e3c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+<main>
+    <section>
+        <h2>Провери знанията си за безопасност на пътя</h2>
+        <p>Попълни липсващата дума и натисни „Провери“.</p>
+
+        <ol>
+            <li>Пресичаме улицата най-безопасно на <input type="text" id="q1"> пътека.</li>
+            <li>Преди да пресечем, гледаме наляво, надясно и пак <input type="text" id="q2">.</li>
+            <li>На червен сигнал на светофара трябва да <input type="text" id="q3">.</li>
+            <li>Когато няма тротоар, вървим срещу <input type="text" id="q4">.</li>
+            <li>Не е безопасно да използваме <input type="text" id="q5">, докато пресичаме.</li>
+            <li>В тъмното е добре да носим <input type="text" id="q6"> елементи.</li>
+            <li>Когато караме велосипед, трябва да носим <input type="text" id="q7">.</li>
+        </ol>
+
+        <button onclick="checkAnswers()">Провери</button>
+
+        <p id="result" style="font-weight:bold; margin-top:15px;"></p>
+
+        <div id="answerList" style="display:none;">
+            <h3>Проверка на отговорите:</h3>
+            <ul id="answersUl"></ul>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <marquee direction="left" scrollamount="5">
+  © 2025 StreetIQ - Интелигентни на пътя, Никол Маринова
+</marquee>
+</footer>
+
+<script>
+function checkAnswers() {
+    const answers = {
+        q1: "пешеходна",
+        q2: "наляво",
+        q3: "спрем",
+        q4: "движението",
+        q5: "телефон",
+        q6: "светлоотразителни",
+        q7: "каска"
+    };
+
+    let correct = 0;
+    const ul = document.getElementById("answersUl");
+    ul.innerHTML = "";
+
+    for (let key in answers) {
+        const userValue = document.getElementById(key).value.trim();
+        const correctValue = answers[key];
+
+        if (userValue.toLowerCase() === correctValue) {
+            correct++;
+        }
+
+        const li = document.createElement("li");
+        li.innerHTML =
+            "Изречение " + key.substring(1) +
+            ": твой отговор – <strong>" + (userValue || "няма") +
+            "</strong>, верен отговор – <strong>" + correctValue + "</strong>";
+
+        ul.appendChild(li);
+    }
+
+    const result = document.getElementById("result");
+    const total = Object.keys(answers).length;
+
+    if (correct === total) {
+        result.textContent = "🎉 Браво! Всички отговори са верни!";
+        result.style.color = "green";
+    } else if (correct >= 4) {
+        result.textContent = "🙂 Добре! Имаш " + correct + " от " + total + " верни отговора.";
+        result.style.color = "orange";
+    } else {
+        result.textContent = "🚦 Имаш " + correct + " от " + total + " верни отговора. Прегледай верните думи.";
+        result.style.color = "red";
+    }
+
+    document.getElementById("answerList").style.display = "block";
+}
+</script>
+
+</body>
+</html>

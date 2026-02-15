@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<title>Тест за интелигентност на пътя</title>
+
+<style>
+    body {
+        font-family: "Comic Sans MS", "Segoe UI", Arial, sans-serif;
+        background: #eef2f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .question {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+
+    .question p {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .answers label {
+        display: block;
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 5px;
+        transition: background 0.3s;
+    }
+
+    .answers input {
+        margin-right: 8px;
+    }
+
+    .correct {
+        background-color: #cce8cc;
+    }
+
+    .wrong {
+        background-color: #f2c2c2;
+    }
+
+    .btn {
+        display: block;
+        margin: 30px auto;
+        padding: 12px 30px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        background-color: #2f6fed;
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #1f57c7;
+    }
+
+    #result {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Тест за интелигентност на пътя</h2>
+
+<form id="quiz"></form>
+
+<button type="button" class="btn" onclick="checkAnswers()">Провери</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+const questions = [
+{
+    q: "Къде трябва да се пресича пътят?",
+    a: [
+        { text: "На пешеходна пътека или светофар", correct: true },
+        { text: "Между паркирани коли", correct: false },
+        { text: "Навсякъде", correct: false }
+    ]
+},
+{
+    q: "Как трябва да погледнем преди пресичане?",
+    a: [
+        { text: "Наляво – надясно – наляво", correct: true },
+        { text: "Само надясно", correct: false },
+        { text: "Без да гледаме", correct: false }
+    ]
+},
+{
+    q: "Какво не трябва да правим при пресичане?",
+    a: [
+        { text: "Да използваме телефон или слушалки", correct: true },
+        { text: "Да гледаме светофара", correct: false },
+        { text: "Да вървим спокойно", correct: false }
+    ]
+},
+{
+    q: "Къде трябва да се движат пешеходците?",
+    a: [
+        { text: "По тротоарите", correct: true },
+        { text: "По пътното платно", correct: false },
+        { text: "Където е по-късо", correct: false }
+    ]
+},
+{
+    q: "Ако няма тротоар, как трябва да вървим?",
+    a: [
+        { text: "Срещу движението на колите", correct: true },
+        { text: "По посока на колите", correct: false },
+        { text: "По средата на пътя", correct: false }
+    ]
+},
+{
+    q: "Защо са важни светлоотразителните елементи?",
+    a: [
+        { text: "Правят ни по-видими", correct: true },
+        { text: "Само за украса", correct: false },
+        { text: "Нямат значение", correct: false }
+    ]
+},
+{
+    q: "Кога са особено важни светлоотразителните елементи?",
+    a: [
+        { text: "Вечер, при мъгла или дъжд", correct: true },
+        { text: "Само през деня", correct: false },
+        { text: "Само лятото", correct: false }
+    ]
+},
+{
+    q: "Какво трябва да правим близо до пътя?",
+    a: [
+        { text: "Да внимаваме и да слушаме за коли", correct: true },
+        { text: "Да слушаме силна музика", correct: false },
+        { text: "Да играем", correct: false }
+    ]
+},
+{
+    q: "Какво трябва да носи велосипедистът?",
+    a: [
+        { text: "Каска и защитна екипировка", correct: true },
+        { text: "Само раница", correct: false },
+        { text: "Нищо специално", correct: false }
+    ]
+},
+{
+    q: "Къде трябва да се кара велосипед?",
+    a: [
+        { text: "По велоалеи или безопасни места", correct: true },
+        { text: "По тротоара сред хората", correct: false },
+        { text: "По оживени улици", correct: false }
+    ]
+},
+{
+    q: "Как трябва да чакаме градски транспорт?",
+    a: [
+        { text: "На безопасно разстояние от бордюра", correct: true },
+        { text: "На самия ръб на пътя", correct: false },
+        { text: "На пътното платно", correct: false }
+    ]
+},
+{
+    q: "Къде е безопасно да играем?",
+    a: [
+        { text: "В паркове и детски площадки", correct: true },
+        { text: "До улицата", correct: false },
+        { text: "На паркинг", correct: false }
+    ]
+}
+];
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+const quiz = document.getElementById("quiz");
+
+questions.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "question";
+
+    div.innerHTML = `<p>${index + 1}. ${item.q}</p>`;
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+
+    shuffle([...item.a]).forEach(ans => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+            <input type="radio" name="q${index}" data-correct="${ans.correct}">
+            ${ans.text}
+        `;
+        answersDiv.appendChild(label);
+    });
+
+    div.appendChild(answersDiv);
+    quiz.appendChild(div);
+});
+
+function checkAnswers() {
+    let score = 0;
+
+    document.querySelectorAll(".question").forEach(question => {
+        const selected = question.querySelector("input:checked");
+
+        question.querySelectorAll("label").forEach(label => {
+            const input = label.querySelector("input");
+            label.classList.remove("correct", "wrong");
+
+            if (input.dataset.correct === "true") {
+                label.classList.add("correct");
+            }
+            if (input.checked && input.dataset.correct === "false") {
+                label.classList.add("wrong");
+            }
+        });
+
+        if (selected && selected.dataset.correct === "true") {
+            score++;
+        }
+    });
+
+    let message;
+    if (score === 12) {
+        message = "Отличен резултат. Познавате много добре правилата за безопасност.";
+    } else if (score >= 8) {
+        message = "Много добър резултат. Малко повторение ще бъде полезно.";
+    } else if (score >= 5) {
+        message = "Добър опит, но е необходимо да се прегледат правилата.";
+    } else {
+        message = "Препоръчва се сериозно повторение на правилата за безопасност.";
+    }
+
+    document.getElementById("result").textContent =
+        `Верни отговори: ${score} от 12. ${message}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<title>Как ще постъпиш? – Безопасност на пътя</title>
+
+<style>
+    body {
+       font-family: "Comic Sans MS", "Segoe UI", Arial, sans-serif;
+        background: #eef2f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .scenario {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .scenario p {
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    select {
+        width: 100%;
+        padding: 8px;
+        font-size: 15px;
+        border-radius: 6px;
+    }
+
+    .correct {
+        background-color: #cce8cc;
+    }
+
+    .wrong {
+        background-color: #f2c2c2;
+    }
+
+    .btn {
+        display: block;
+        margin: 25px auto;
+        padding: 12px 30px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        background-color: #2f6fed;
+        color: white;
+        cursor: pointer;
+    }
+
+    #result {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Как ще постъпиш в следните ситуации?</h2>
+
+<div class="scenario">
+    <p>1. Светофарът за пешеходци свети червено, но няма коли.</p>
+    <select data-correct="Изчаквам зеления сигнал">
+        <option value="">Избери отговор</option>
+        <option>Пресичам веднага</option>
+        <option>Изчаквам зеления сигнал</option>
+        <option>Тичам бързо</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>2. Вървиш с приятели по пешеходна пътека.</p>
+    <select data-correct="Движа се вдясно и не преча на другите">
+        <option value="">Избери отговор</option>
+        <option>Вървя напряко</option>
+        <option>Движа се вдясно и не преча на другите</option>
+        <option>Тичам напред</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>3. Чуваш кола, но не я виждаш.</p>
+    <select data-correct="Спирам и се оглеждам внимателно">
+        <option value="">Избери отговор</option>
+        <option>Продължавам без да гледам</option>
+        <option>Спирам и се оглеждам внимателно</option>
+        <option>Слагам слушалки</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>4. Караш колело и наближаваш знак „Стоп“.</p>
+    <select data-correct="Спирам напълно">
+        <option value="">Избери отговор</option>
+        <option>Продължавам без да спирам</option>
+        <option>Спирам напълно</option>
+        <option>Само намалявам</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>5. Преди да тръгнеш с колелото си.</p>
+    <select data-correct="Проверявам спирачките и гумите">
+        <option value="">Избери отговор</option>
+        <option>Тръгвам веднага</option>
+        <option>Проверявам спирачките и гумите</option>
+        <option>Карам без каска</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>6. В автобуса няма свободно място.</p>
+    <select data-correct="Хващам се за дръжките">
+        <option value="">Избери отговор</option>
+        <option>Стоя без да се държа</option>
+        <option>Хващам се за дръжките</option>
+        <option>Облягам се на вратата</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>7. Топката ти пада към улицата.</p>
+    <select data-correct="Спирам и моля възрастен за помощ">
+        <option value="">Избери отговор</option>
+        <option>Тичам след топката</option>
+        <option>Спирам и моля възрастен за помощ</option>
+        <option>Излизам внезапно на пътя</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>8. Пресичаш на кръстовище със завиващи коли.</p>
+    <select data-correct="Уверявам се, че шофьорите са ме видели">
+        <option value="">Избери отговор</option>
+        <option>Пресичам без да гледам</option>
+        <option>Уверявам се, че шофьорите са ме видели</option>
+        <option>Бързам и тичам</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>9. Движиш се в група на оживено място.</p>
+    <select data-correct="Следвам указанията на възрастен">
+        <option value="">Избери отговор</option>
+        <option>Отивам сам напред</option>
+        <option>Следвам указанията на възрастен</option>
+        <option>Бутам другите</option>
+    </select>
+</div>
+
+<div class="scenario">
+    <p>10. Улицата изглежда празна и тиха.</p>
+    <select data-correct="Спазвам правилата независимо от това">
+        <option value="">Избери отговор</option>
+        <option>Пресичам без внимание</option>
+        <option>Спазвам правилата независимо от това</option>
+        <option>Тичам</option>
+    </select>
+</div>
+
+<button class="btn" onclick="checkSituations()">Провери</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+function checkSituations() {
+    let score = 0;
+    const selects = document.querySelectorAll("select");
+
+    selects.forEach(select => {
+        select.classList.remove("correct", "wrong");
+
+        if (select.value === select.dataset.correct) {
+            select.classList.add("correct");
+            score++;
+        } else if (select.value !== "") {
+            select.classList.add("wrong");
+        }
+    });
+
+    let message;
+    if (score === 10) {
+        message = "Отличен резултат. Прилагаш правилата правилно в реални ситуации.";
+    } else if (score >= 7) {
+        message = "Много добър резултат. Малко повторение ще бъде полезно.";
+    } else if (score >= 4) {
+        message = "Добър опит, но е нужно да се обърне повече внимание.";
+    } else {
+        message = "Препоръчва се повторение на правилата за безопасност.";
+    }
+
+    document.getElementById("result").textContent =
+        `Верни отговори: ${score} от 10. ${message}`;
+}
+</script>
+
+</body>
+</html>
