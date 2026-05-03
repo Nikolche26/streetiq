@@ -79,30 +79,53 @@
             padding: 15px;
             margin-top: 40px;
         }
-.site-header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #4caf50, #81c784);
-    color: white;
-}
+	.site-header {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		padding: 15px 20px;
+		background: linear-gradient(135deg, #4caf50, #81c784);
+		color: white;	
+		}
 
-.header-left,
-.header-right {
+	.header-left,
+	.header-right {
     width: 60px; /* балансира центъра */
-}
+	}
 
-.logo {
+	.logo {
     width: 45px;
     height: auto;
-}
+	}
 
-.header-center h1 {
+	.header-center h1 {
     margin: 0;
     text-align: center;
     font-size: 28px;
-}
+	}
+	 /* АУДИО ПЛЕЙЪР */
+        .audio-player {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .controls button:hover {
+            background: #388e3c;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -129,6 +152,18 @@
 </nav>
 
 <main>
+ <!-- АУДИО ПЛЕЙЪР -->
+    <div class="audio-player">
+        <audio id="myAudio">
+            <source src="audio/pravila.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="controls">
+            <button onclick="playAudio()">▶ Пусни</button>
+            <button onclick="pauseAudio()">⏸ Пауза</button>
+            <button onclick="stopAudio()">⏹ Спри</button>
+        </div>
+    </div>
   <h2>Как да се движим безопасно по пътищата</h2>
 
     <p>
@@ -282,7 +317,28 @@
         <li>Помнете сигналите и знаците – те са за ваша защита.</li>
     </ul>
 
-  
+  <h2> Презентации за безопасност на движението по пътищата</h2>
+<h2> 5. клас</h2>
+            <p>
+                Чрез хипервръзката може да изтеглите презентацията
+            </p>
+  <a href="PP/bdp5.pptx" download><h3>БДП за 5. клас<h3></a>
+</a>
+<h2> 6. клас</h2>
+
+            <p>
+                Чрез хипервръзката може да изтеглите презентацията
+            </p>
+ <a href="PP/bdp6.pptx" download><h3>БДП за 6. клас<h3></a>
+           
+</a>
+<h2> 6. клас</h2>
+
+            <p>
+                Чрез хипервръзката може да изтеглите презентацията
+            </p>
+  <a href="PP/bdp7.pptx" download><h3>БДП за 7. клас<h3></a>
+</a>
 </main>
 
 <footer>
@@ -290,6 +346,21 @@
   © 2025 StreetIQ - Интелигентни на пътя, Никол Маринова
 </marquee>
 </footer>
+<script>
+    const audio = document.getElementById("myAudio");
 
+    function playAudio() {
+        audio.play();
+    }
+
+    function pauseAudio() {
+        audio.pause();
+    }
+
+    function stopAudio() {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+</script>
 </body>
 </html>
