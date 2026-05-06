@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>StreetIQ - Интелигентни на пътя</title>
+<meta name="description" content="StreetIQ е образователен уебсайт за безопасност на движението по пътищата за деца и ученици.">
+<meta name="keywords" content="StreetIQ, БДП, пътна безопасност, правила за движение, обучение, деца, пешеходци">
+<meta name="author" content="Никол Маринова">
+<meta property="og:title" content="StreetIQ - Интелигентни на пътя">
+<meta property="og:description" content="Образователен сайт за безопасност на движението">
+<meta property="og:url" content="https://nikolche26.github.io/streetiq/">
+<meta property="og:type" content="website">
     <style>
         body {
             margin: 0;
@@ -64,46 +71,49 @@
             font-size: 17px;
             line-height: 1.6;
             color: #333;
-		}
-
-        main img {
-            width: 100%;
-            border-radius: 15px;
-            margin: 15px 0;
         }
 
-       footer {
+        /* ✔️ ЕДИНСТВЕНАТА ПОПРАВКА */
+        .rule-img {
+            width: 50%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        footer {
             background-color: #388e3c;
             color: white;
             text-align: center;
             padding: 15px;
             margin-top: 40px;
         }
-	.site-header {
-		display: grid;
-		grid-template-columns: auto 1fr auto;
-		align-items: center;
-		padding: 15px 20px;
-		background: linear-gradient(135deg, #4caf50, #81c784);
-		color: white;	
-		}
 
-	.header-left,
-	.header-right {
-    width: 60px; /* балансира центъра */
-	}
+        .site-header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+        }
 
-	.logo {
-    width: 45px;
-    height: auto;
-	}
+        .header-left,
+        .header-right {
+            width: 60px;
+        }
 
-	.header-center h1 {
-    margin: 0;
-    text-align: center;
-    font-size: 28px;
-	}
-	 /* АУДИО ПЛЕЙЪР */
+        .logo {
+            width: 45px;
+        }
+
+        .header-center h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 28px;
+        }
+
         .audio-player {
             text-align: center;
             margin-bottom: 20px;
@@ -127,7 +137,9 @@
             transform: scale(1.1);
         }
     </style>
+	
 </head>
+
 <body>
 
 <header class="site-header">
