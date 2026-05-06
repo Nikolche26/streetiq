@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nikolche26.github.io/streetiq/sitemap.xml
